@@ -30,7 +30,7 @@ class SelectMultipleField(widgets.SelectMultiple):
         if value is None:
             value = []
 
-        final_attrs = self.build_attrs(rendered_attrs, name=name)
+        final_attrs = self.build_attrs(rendered_attrs, dict(name=name))
         # output = [u'<select multiple="multiple"%s>' % flatatt(final_attrs)]
         output = [format_html('<select multiple="multiple"{0}>',
                               flatatt(final_attrs))]
