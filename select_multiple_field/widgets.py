@@ -34,7 +34,7 @@ class SelectMultipleField(widgets.SelectMultiple):
         # output = [u'<select multiple="multiple"%s>' % flatatt(final_attrs)]
         output = [format_html('<select multiple="multiple"{0}>',
                               flatatt(final_attrs))]
-        options = self.render_options(choices, value)
+        options = self.options(choices, value)
         if options:
             output.append(options)
 
