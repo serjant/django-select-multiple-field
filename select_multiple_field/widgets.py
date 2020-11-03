@@ -27,19 +27,12 @@ class SelectMultipleField(widgets.SelectMultiple):
     def render(self, name, value, attrs={}, choices=(), renderer=None):
         rendered_attrs = {'class': HTML_ATTR_CLASS}
         rendered_attrs.update(attrs)
-        if value is None:
-            value = []
 
         final_attrs = self.build_attrs(rendered_attrs, dict(name=name))
-        # output = [u'<select multiple="multiple"%s>' % flatatt(final_attrs)]
-        output = [format_html('<select multiple="multiple"{0}>',
-                              flatatt(final_attrs))]
-        options = self.options(choices, value)
-        if options:
-            output.append(options)
+        s = widgets.SelectMultiple(choices=self.choices)
+        select_html = s.render(name=name, value=value, attrs=final_attrs)
 
-        output.append('</select>')
-        return mark_safe('\n'.join(output))
+        return mark_safe(''.join(select_html))
 
     def value_from_datadict(self, data, files, name):
         """
